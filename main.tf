@@ -5,23 +5,23 @@
 # Data source to get the access to the effective Account ID, User ID, and ARN in which Terraform is authorized.
 
 
-data "aws_iam_role" "example_role" {
-  name = var.role_name
-}
+# data "aws_iam_role" "example_role" {
+#   name = var.role_name
+# }
 
 
-data "template_file" "userdata" {
-  template = file("resources/userdata.tpl")
-  vars = {
-    fs_id = var.fs_id
-  }
-}
+# data "template_file" "userdata" {
+#   template = file("resources/userdata.tpl")
+#   vars = {
+#     fs_id = var.fs_id
+#   }
+# }
 
 
 resource "aws_instance" "example_ec2" {
   ami                    = var.ami
   instance_type          = var.instance_type
-  user_data_base64 = "${base64encode(data.template_file.userdata.rendered)}"
+#   user_data_base64 = "${base64encode(data.template_file.userdata.rendered)}"
   vpc_security_group_ids = (var.security_group)
   subnet_id              = var.subnet_id
   key_name               = aws_key_pair.key_pair.id
@@ -29,7 +29,7 @@ resource "aws_instance" "example_ec2" {
   root_block_device {
     volume_size = var.volume_size
   }
-  iam_instance_profile = data.aws_iam_role.example_role.name
+#   iam_instance_profile = data.aws_iam_role.example_role.name
    tags = {
       Name = var.instance_name
       component = var.component
