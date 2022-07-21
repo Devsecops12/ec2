@@ -10,7 +10,7 @@ terraform {
     #This ensures the state file is stored encrypted at rest in S3.
     encrypt = true
     #This is the region of your S3 Bucket.
-    region  = "us-east-1"
+    region  = "us-east-2"
     #---------------------------
     # Configurable Options
     #---------------------------
